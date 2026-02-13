@@ -1,7 +1,7 @@
 
 create DATABASE IF NOT EXISTS Musicclube;
 
-use Musictube;
+use Musicclube;
 
 CREATE TABLE IF NOT EXISTS genero (
  nome VARCHAR(30) NOT NULL primary key,

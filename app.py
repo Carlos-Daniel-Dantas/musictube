@@ -4,13 +4,13 @@ import mysql.connector
 
 app = Flask (__name__)
 
-@app.route("/home", methdots=["GET"])
+@app.route("/home", methods=["GET"])
 @app.route("/")
 
 def pagina_principal():
 
     #conectando no banco de dados
-    conexao = mysql.connctor.connect(
+    conexao = mysql.connector.connect(
         host="127.0.0.1",
         port="3306",
         user="root",
@@ -23,7 +23,7 @@ def pagina_principal():
     cursor = conexao.cursor(dictionary=True)
 
     #executando a consulta
-    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero, FROM musica;")
+    cursor.execute("SELECT codigo, cantor, duracao, nome, url_imagem, nome_genero FROM musica;")
 
     #recuperando os dados
     musicas = cursor.fetchall()
