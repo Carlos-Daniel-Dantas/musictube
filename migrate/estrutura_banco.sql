@@ -1,23 +1,19 @@
+CREATE DATABASE IF NOT EXISTS musicclube;
 
-create DATABASE IF NOT EXISTS Musicclube;
-
-use Musicclube;
+USE musicclube;
 
 CREATE TABLE IF NOT EXISTS genero (
- nome VARCHAR(30) NOT NULL primary key,
+ nome VARCHAR(30) NOT NULL PRIMARY KEY,
  icone VARCHAR(100),
- cor VARCHAR(10)
+ cor VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS musica (
- codigo INT NOT NULL primary key auto_increment,
- cantor VARCHAR(50) NOT NULL,
+ codigo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ cantor VARCHAR(50),
  duracao TIME,
- nome VARCHAR(80),
- url_imagem CHAR(255),
+ nome VARCHAR(50),
+ url_imagem VARCHAR(255),
  nome_genero VARCHAR(30),
- constraint fk_musica_genero foreign key (nome_genero) REFERENCES genero (nome)
+ CONSTRAINT fk_musica_genero FOREIGN KEY (nome_genero) REFERENCES genero (nome)
 );
-
-
-
