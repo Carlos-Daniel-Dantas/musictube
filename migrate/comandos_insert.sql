@@ -1,4 +1,4 @@
-INSERT INTO musicclube.música
+INSERT INTO musicclube.musica
 (cantor,
 duracao,
 nome,
@@ -13,7 +13,7 @@ VALUES
 
 
 
-INSERT INTO musicclube.música
+INSERT INTO musicclube.musica
 (cantor,
 duracao,
 nome,
@@ -25,3 +25,9 @@ VALUES
 "Edi Rock, Bagua Records",
 "https://i.scdn.co/image/ab67616d00001e0207bc7d2a745636c356b4d0aa",
 "Rock");
+
+INSERT INTO musicclube.genero (nome, icone, cor) 
+VALUES 
+("Rock", "", "red"),
+("Pop", "", "blue"),
+("Pagode", "", "yellow");
