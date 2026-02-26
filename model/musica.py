@@ -43,3 +43,21 @@ def salvar_musica(nome_musica:str, cantor:str, duracao:str, url_imagem:str, gene
     except:
         return False
     
+def excluir_musica(codigo):
+    """Pegara o codigo que é autoincrement e vai excluir a música apartir dele"""
+
+    conexao, cursor = conectar()
+
+    cursor.execute("""
+                    
+                    delete from musica WHERE codigo = %s;
+                       
+                    """,
+
+                [codigo]
+                    )
+        
+    conexao.commit()
+    conexao.close()
+
+

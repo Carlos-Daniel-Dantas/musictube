@@ -29,6 +29,8 @@
         
         .title, .label { color: #fff !important; }
         .subtitle { color: #485fc7 !important; }
+
+
     </style>
 </head>
 <body>
@@ -103,7 +105,7 @@
                                     <select name="input_genero_nome">
                                         <option>Selecione...</option>
                                         {% for genero in generos %}
-                                        <option value="{{genero.nome}}"> {{genero.nome}} </option>
+                                        <option value="categoria-musica"> {{ genero.nome }} </option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -124,7 +126,7 @@
                     
 
                     <tr>
-                        <th class="has-text-centered">ID</th>
+                        <th class="has-text-centered"> Id </th>
                         <th> CAPA </th>
                         <th>Título / Cantor</th>
                         <th class="has-text-centered">Duração</th>
@@ -137,7 +139,7 @@
 
                     {% for musica in musicas %}
                     <tr>
-                        <td class="has-text-centered has-text-link is-family-monospace">1</td>
+                        <td class="has-text-centered has-text-link is-family-monospace"> {{ musica.codigo }} </td>
                         <td style="width: 80px;">
                             <figure class="image is-48x48">
                                 <img src="{{ musica.url_imagem }}" class="is-rounded" style="object-fit: cover;">
@@ -148,9 +150,14 @@
                             <small class="has-text-grey">{{ musica.cantor }}</small>
                         </td>
                         <td class="is-family-monospace has-text-centered">{{musica.duracao}}</td>
-                        <td><span class="tag is-dark"> {{musica.genero}} </span></td>
+                        <td><span class="tag is-dark"> {{ musica.nome_genero }} </span></td>
                         <td class="has-text-centered">
+
+                            {% if musica.ativo %}
                             <span class="tag is-success is-light">ATIVO</span>
+                            {% else %}
+                            <span class="tag is-success is-light">DESATIVADO</span>
+                            {% endif %}
                         </td>
                         <td class="has-text-right px-5">
 
@@ -160,7 +167,7 @@
                                 <button class="button is-small is-warning is-light" title="Desativar">
                                     <i class="fa-solid fa-eye-slash"></i>
                                 </button>
-                                <button class="button is-small is-danger is-light" title="Excluir">
+                                <a href="/musica/delete/{{musica.codigo}}" class="button is-small is-danger is-light" title="Excluir">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
