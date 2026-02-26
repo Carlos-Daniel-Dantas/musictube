@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request, redirect
-import mysql.connector
 from model.genero import recuperar_generos
 from model.musica import recuperar_musicas, salvar_musica
+import mysql.connector
 
 app = Flask (__name__)
-
-
 
 @app.route("/admin")
 def pagina_admin():
@@ -42,7 +40,6 @@ def api_inserir_musica():
         return redirect("/admin")
     else:
         return "Erro ao adicionar música"
-
 
 
 if __name__ == "__main__":

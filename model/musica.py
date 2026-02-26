@@ -42,8 +42,4 @@ def salvar_musica(nome_musica:str, cantor:str, duracao:str, url_imagem:str, gene
         return True
     except:
         return False
-
-    #def excluir_musica():
-
     
-
