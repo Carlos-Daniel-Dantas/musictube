@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from model.genero import recuperar_generos
 from model.musica import recuperar_musicas, salvar_musica
-from model.musica import excluir_musica
+from model.musica import excluir_musica, ativar_musica
 import mysql.connector
 
 app = Flask (__name__)
@@ -21,10 +21,10 @@ def pagina_admin():
 @app.route("/")
 def pagina_principal():
 
-    musicas = recuperar_musicas()
+    musicas = recuperar_musicas(True)
     generos = recuperar_generos()
 
-    return render_template("principal.html", musicas = musicas, generos = generos)
+    return render_template("principal.html", musicas = musicas, genero = generos)
 
 @app.route("/musica/post", methods=["POST"])
 def api_inserir_musica():
@@ -33,7 +33,7 @@ def api_inserir_musica():
     cantor_musica = request.form.get("input_cantor_musica")
     duracao_musica = request.form.get("input_duracao_musica")
     url_musica = request.form.get("input_url_musica")
-    genero_nome = request.form.get("categoria-musica")
+    genero_nome = request.form.get("genero_nome")
 
 
     if salvar_musica(nome_musica, cantor_musica, duracao_musica, url_musica, genero_nome ):
@@ -47,9 +47,11 @@ def apagar_musica (codigo):
     excluir_musica(codigo)
     return redirect("/admin")
 
+@app.route("/musica/ativar/<codigo>/<status>")
+def mudar_status_musica (codigo, status):
+    ativar_musica(codigo, status)
+    return redirect("/admin")
 
-@app.route("/musica/status/<status>/<codigo>")
-    def 
 
 
 if __name__ == "__main__":
