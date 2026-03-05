@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect
 from model.genero import recuperar_generos
 from model.musica import recuperar_musicas, salvar_musica
 from model.musica import excluir_musica, ativar_musica
+from model.cadastro import cadastrar_usuario 
+
 import mysql.connector
 
 app = Flask (__name__)
@@ -51,6 +53,26 @@ def apagar_musica (codigo):
 def mudar_status_musica (codigo, status):
     ativar_musica(codigo, status)
     return redirect("/admin")
+
+@app.route("/usuario/cadastro", methods=["POST"])
+def cadastro_de_usuario():
+
+    senha = request.form.get("input_usuario")
+    usuario = request.form.get("input_senha")
+
+    cadastrar_usuario(senha,usuario)
+    return redirect("/home")
+
+@app.route("/cadastro", methods=["GET"])
+
+def cadastro_usuario():
+
+    return render_template("cadastro.html")
+
+@app.route("/login")
+
+def login_usuario():
+        return render_template("cadastro.html")
 
 
 
