@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from model.genero import recuperar_generos
 from model.musica import recuperar_musicas, salvar_musica
 from model.musica import excluir_musica, ativar_musica
-from model.cadastro import cadastrar_usuario 
+from model.cadastro import cadastrar_usuario, autenticar_usuario
 
 import mysql.connector
 
@@ -17,7 +17,6 @@ def pagina_admin():
 
     #MOSTRANDO PÁGINA
     return render_template("administracao.html", musicas = musicas, generos = generos)
-
 
 @app.route("/home", methods=["GET"])
 @app.route("/")
@@ -36,7 +35,6 @@ def api_inserir_musica():
     duracao_musica = request.form.get("input_duracao_musica")
     url_musica = request.form.get("input_url_musica")
     genero_nome = request.form.get("genero_nome")
-
 
     if salvar_musica(nome_musica, cantor_musica, duracao_musica, url_musica, genero_nome ):
 
@@ -59,7 +57,6 @@ def cadastro_de_usuario():
 
     senha = request.form.get("input_usuario")
     usuario = request.form.get("input_senha")
-
     cadastrar_usuario(senha,usuario)
     return redirect("/home")
 
@@ -69,12 +66,15 @@ def cadastro_usuario():
 
     return render_template("cadastro.html")
 
-@app.route("/login")
-
+@app.route("/login", methods=["POST"])
 def login_usuario():
-        return render_template("cadastro.html")
-
-
+        
+    senha = request.form.get("input_usuario")
+    usuario = request.form.get("input_senha")
+    usuario = autenticar_usuario(usuario, senha)
+    
+        
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

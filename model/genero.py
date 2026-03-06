@@ -1,8 +1,7 @@
 from database.conexao import conectar 
 
 def recuperar_generos():
-    
-    #passo 1 e 2 já feito
+
     conexao, cursor = conectar()
 
     cursor.execute("SELECT nome, icone, cor FROM genero;")

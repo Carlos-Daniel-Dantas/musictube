@@ -2,8 +2,6 @@ from database.conexao import conectar
 
 def cadastrar_usuario(login:str, senha:str):
     
-    #passo 1 e 2 já feito
-
     try:
         conexao, cursor = conectar()
 
@@ -25,4 +23,30 @@ def cadastrar_usuario(login:str, senha:str):
         return True
     except:
         return False
+
+def autenticar_usuario(login:str, senha:str) -> list:
+
+    """ Função que Verifica se o úsuario esta cadastrado, 
+    se estiver retorna todos os dados do usuaário, se não
+      estiver etorna None"""
+
+    conexao, cursor = conectar()
+
+    cursor.execute("""
+
+                    select usuario, senha From cadastro WHERE usuario = $s and senha = $s, 
+                
+                """, 
+                [login, senha]
+                
+                )
+    
+    usuario = cursor.fetchone()
+
+    if usuario is not None:
+        try:
+            return True
+        except Exception as erro:
+            print(erro)
+            return False
 

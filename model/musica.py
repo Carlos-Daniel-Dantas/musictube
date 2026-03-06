@@ -10,7 +10,6 @@ def recuperar_musicas(ativo:bool=False):
 
     #else:
 
-
     musicas = cursor.fetchall()
 
     conexao.close()
