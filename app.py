@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, flash
 from model.genero import recuperar_generos
 from model.musica import recuperar_musicas, salvar_musica
 from model.musica import excluir_musica, ativar_musica
@@ -8,8 +8,12 @@ import mysql.connector
 
 app = Flask (__name__)
 
+app.secret_key = "BananaComFeijao"
+
 @app.route("/admin")
 def pagina_admin():
+    if "usuario_logado" not in session:
+       return redirect("/login")
 
     #RECUPERANDO MÚSICAS
     musicas = recuperar_musicas()
@@ -66,15 +70,35 @@ def cadastro_usuario():
 
     return render_template("cadastro.html")
 
+@app.route("/login")
+def validar_login():
+    return render_template("login.html")
+
+
 @app.route("/login", methods=["POST"])
+
 def login_usuario():
         
-    senha = request.form.get("input_usuario")
-    usuario = request.form.get("input_senha")
-    usuario = autenticar_usuario(usuario, senha)
-    
-        
-    return render_template("login.html")
+    usuario = request.form.get("input_usuario")
+    senha = request.form.get("input_senha")
+    login = autenticar_usuario(usuario, senha)
+
+    if usuario:
+        session["usuario_logado"] = usuario
+        flash(f"Seja Bem-vindo")
+        return redirect("/admin")
+    else:
+        flash(f"Usuário ou senha ínvalido ", "danger")
+        flash(f"Tente novamente")
+        return
+
+
+@app.route("/logof")
+def logof():
+    session.clear()
+    return redirect("/")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

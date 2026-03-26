@@ -27,14 +27,14 @@ def cadastrar_usuario(login:str, senha:str):
 def autenticar_usuario(login:str, senha:str) -> list:
 
     """ Função que Verifica se o úsuario esta cadastrado, 
-    se estiver retorna todos os dados do usuaário, se não
+    se estiver retorna todos os dados do usuário, se não
       estiver etorna None"""
 
     conexao, cursor = conectar()
 
     cursor.execute("""
 
-                    select usuario, senha From cadastro WHERE usuario = $s and senha = $s, 
+                    select usuario, senha From cadastro WHERE usuario = %s and senha = %s
                 
                 """, 
                 [login, senha]

@@ -18,6 +18,7 @@
         background-size: cover; 
 
         background-image: url('/IMG/download.jpg');
+        background-color: black;
 
     }
 
@@ -74,10 +75,7 @@
         transform: scale(1.1);
         background-color: rgb(1, 1, 206);
     }
-    .botao_cadastro:hover {
-        transform: scale(1.1);
-        background-color: rgb(1, 1, 206);
-    }
+
 
     .input__cadastro {
         background-color: rgba(61, 61, 61, 0.644);
@@ -91,6 +89,7 @@
     div {
         background-color: rgb(0, 0, 0);
         width: 500px;
+    
         
     }
 
@@ -111,7 +110,20 @@
 
 <body>
 
-    <form action="/usuario/login" method="post">
+    <div>
+
+        {% with mensagens = get_flashed_messages() %}
+            {% for mensagem, categoria in mensagens %}
+                <h3>
+                    {{mensagem}}
+                </h3>
+            {% endfor %}
+        {% endwith %}
+        
+
+    </div>
+
+    <form action="/login" method="post">
 
         <div class="input__cadastro">
 
@@ -129,7 +141,6 @@
 
             <input name="input_senha" class="input_senha" type="password" placeholder="Digite sua senha aqui">
 
-            <button type="submit" class="botao_cadastro" name="button__input_cadastrar"> Cadastrar </button>
             <button type="submit" class="botao_login" name="button__input_login"> Login </button>
 
         </div>
