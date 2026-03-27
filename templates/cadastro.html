@@ -8,107 +8,93 @@
 </head>
 <style>
     body {
-
-        margin: 0;
-        padding: 0;
-        min-width: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
         display: flex;
         justify-content: center;
-        padding: 250px;
-        background-size: cover; 
-
-        background-image: url('/IMG/download.jpg');
-
+        align-items: center;
+        height: 100vh;
+        margin: 0;
     }
 
-    .input_usuario {
-
-        border: none;
-        border-radius: 10px;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 10px;
-        width: 450px;
-
-    }
-
-    .input_senha {
-
-        border: none;
-        border-radius: 10px;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 10px;
-        width: 450px;
-
-    }
-
-    .botao_cadastro {
-
-        border: none;
-        padding: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 25px;
-        color: rgb(255, 255, 255);
-        background-color: rgba(0, 0, 255, 0.466);
-        border-radius: 10px;
-        width: 200px;
-
-    }
-    .botao_login {
-
-        border: none;
-        padding: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 15px;
-        color: rgb(255, 255, 255);
-        background-color: rgba(0, 0, 255, 0.466);
-        border-radius: 10px;
-        width: 200px;
-
-    }
-
-    .botao_login:hover {
-        transform: scale(1.1);
-        background-color: rgb(1, 1, 206);
-    }
-    .botao_cadastro:hover {
-        transform: scale(1.1);
-        background-color: rgb(1, 1, 206);
-    }
-
+    /* Container do Formulário */
     .input__cadastro {
-        background-color: rgba(61, 61, 61, 0.644);
-        padding: 30px;
-        flex-direction: column;
-        margin: 20px;
-        border-radius: 15px;
-
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
     }
 
-    div {
-        background-color: rgb(0, 0, 0);
-        width: 500px;
-        
+    /* Estilo do Bem-vindo (Label) */
+    .input__cadastro label {
+        display: block;
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: bold;
     }
 
-    h1 {
-        color: rgb(255, 255, 255);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 15px;
-
+    /* Ajustando os títulos Usuário e Senha */
+    .input__cadastro h1 {
+        font-size: 1rem;
+        color: #555;
+        text-align: left;
+        margin-bottom: 8px;
+        margin-top: 15px;
     }
 
-    label{
+    /* Estilização dos Inputs */
+    .input_usuario,
+    .input_senha {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        /* Garante que o padding não aumente o tamanho final */
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .input_usuario:focus,
+    .input_senha:focus {
+        border-color: #4a90e2;
+        outline: none;
+    }
+
+    /* Botão de Login */
+    .botao_cadastro {
+        width: 100%;
+        padding: 12px;
+        background-color: #4a90e2;
         color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 25px;
-        margin: 20px;
-
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s;
     }
 
+    .botao_cadastro:hover {
+        background-color: #357abd;
+    }
+
+    /* Mensagens de Flash (Flask) */
+    h3 {
+        font-size: 0.9rem;
+        color: #d9534f;
+        /* Tom de erro/alerta */
+        background-color: #f8d7da;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #f5c6cb;
+    }
 </style>
 
 <body>
